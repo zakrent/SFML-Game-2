@@ -1,5 +1,4 @@
 #include "map.h"
-#include <iostream>
 
 Map::Map(){}
 
@@ -24,8 +23,8 @@ void Map::draw(sf::RenderTarget &window){
 void Map::update(){
     for(int i = 0; i < objects.size(); i++){
         objects[i]->update();
-        for(int x = i; x < objects.size()-1; x++){
-            objects[x]->checkCollision(objects[x+1]);
+        for(int x = i+1; x < objects.size(); x++){
+            objects[i]->checkCollision(objects[x]);
         };
     };
 

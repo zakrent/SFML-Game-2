@@ -2,7 +2,7 @@
 #include "object.h"
 
 class Map{
-private:
+public: //placeholder
     std::vector < Object* > objects;
     sf::Vector2f size;
 public:
