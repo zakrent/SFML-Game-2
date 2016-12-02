@@ -11,8 +11,8 @@ Object::Object(float _x, float _y,float _xSize, float _ySize, float _xSpeed, flo
 }
 
 void Object::update(){
-    prevPosition = position;
-    position += velocity;
+    position.x += velocity.x;
+    position.y += velocity.y;
     sprite.setPosition(position);
 }
 
@@ -31,11 +31,17 @@ void Object::checkCollision(Object* &colCandidate){
             colCandidate->position.y, colCandidate->position.y+colCandidate->sprite.getSize().y
         );
         if(collision){ //placeholder
-            velocity = -velocity;
-            colCandidate->velocity = -colCandidate->velocity;
-            colCandidate->sprite.setFillColor(sf::Color::Red);
-            sprite.setFillColor(sf::Color::Red);
-            return;
+            if(velocity != sf::Vector2f{0,0}){
+                velocity = -velocity;
+                position += velocity;
+                position += velocity; // *2
+            }
+            if(colCandidate->velocity != sf::Vector2f{0,0}){
+                colCandidate->velocity = -colCandidate->velocity;
+                colCandidate->position += colCandidate->velocity;
+                colCandidate->position += colCandidate->velocity; // *2
+            }
         }
     }
+    prevPosition = position;
 }

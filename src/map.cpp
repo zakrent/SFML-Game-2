@@ -25,7 +25,7 @@ void Map::update(){
         objects[i]->update();
         for(int x = i+1; x < objects.size(); x++){
             objects[i]->checkCollision(objects[x]);
-        };
-    };
+        }
+    }
 
 }

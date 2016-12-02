@@ -7,6 +7,7 @@ using namespace sf;
 class Game{
 private:
     RenderWindow window;
+    sf::Mouse mouse;
     Map scene;
 public:
     Game();

@@ -3,7 +3,7 @@
 
 Game::Game(){
     window.create(VideoMode(600, 600), "Game");
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(120);
 }
 
 Game::~Game(){
@@ -16,26 +16,27 @@ void Game::mainLoop(){
         for(int y=0; y < MAP_SIZE; y++){
             if(i == 0 || y == 0 || i == MAP_SIZE-1 || y == MAP_SIZE-1){
                 scene.addObject(new Object(i*20, y*20, 18, 18, 0, 0, true));
+                scene.objects[scene.objects.size()-1]->sprite.setFillColor(sf::Color::Blue);
             }else{
                 scene.addObject(new Object(i*20, y*20, 18, 18, 0, 0, false));
             }
         }
     }
 
-    Object object1(80, 80, 20, 20, 5, -3, true);
-    object1.sprite.setFillColor(sf::Color::Yellow);
+    Object object1(80, 80, 20, 20, 2, 5, true);
+    object1.sprite.setFillColor(sf::Color::Red);
     scene.addObject(&object1);
 
-    Object object2(80, 100, 20, 20, -2, -5, true);
-    object2.sprite.setFillColor(sf::Color::Yellow);
+    Object object2(80, 50, 20, 20, 3, -1, true);
+    object2.sprite.setFillColor(sf::Color::Green);
     scene.addObject(&object2);
 
-    Object object3(110, 100, 20, 20, -6, -5, true);
-    object2.sprite.setFillColor(sf::Color::Yellow);
+    Object object3(15, 50, 20, 20, -8, -5, true);
+    object3.sprite.setFillColor(sf::Color::Black);
     scene.addObject(&object3);
 
-    Object dummy(10000, 10000, 0, 0, 0, 0, false);//last object is bugged for now i'll add dummy one
-    object2.sprite.setFillColor(sf::Color::Transparent);
+    Object dummy(5000, 5000, 0, 0, 0, 0, false);//last object is bugged for now i'll add dummy one
+    dummy.sprite.setFillColor(sf::Color::Transparent);
     scene.addObject(&dummy);
 
     while(window.isOpen()) {
