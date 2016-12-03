@@ -3,16 +3,27 @@
 
 Object::Object(){};
 
-Object::Object(float _x, float _y,float _xSize, float _ySize, float _xSpeed, float _ySpeed, bool _isSolid){
+Object::Object(float _x, float _y,float _xSize, float _ySize, bool _isSolid){
     isSolid = _isSolid;
+    isStatic = true;
+    position = {_x, _y};
+    sprite.setSize(sf::Vector2f{_xSize, _ySize});
+}
+
+Object::Object(float _x, float _y,float _xSize, float _ySize, float _xSpeed, float _ySpeed, int _mass, bool _isSolid){
+    isSolid = _isSolid;
+    isStatic = false;
+    mass = _mass;
     position = {_x, _y};
     velocity = {_xSpeed, _ySpeed};
     sprite.setSize(sf::Vector2f{_xSize, _ySize});
 }
 
 void Object::update(){
-    position.x += velocity.x;
-    position.y += velocity.y;
+    if(!isStatic){
+        position.x += velocity.x;
+        position.y += velocity.y;
+    }
     sprite.setPosition(position);
 }
 
@@ -31,17 +42,14 @@ void Object::checkCollision(Object* &colCandidate){
             colCandidate->position.y, colCandidate->position.y+colCandidate->sprite.getSize().y
         );
         if(collision){ //placeholder
-            if(velocity != sf::Vector2f{0,0}){
-                velocity = -velocity;
+            if(!isStatic){
+                velocity = - velocity;
                 position += velocity;
-                position += velocity; // *2
             }
-            if(colCandidate->velocity != sf::Vector2f{0,0}){
+            if(!colCandidate->isStatic){
                 colCandidate->velocity = -colCandidate->velocity;
                 colCandidate->position += colCandidate->velocity;
-                colCandidate->position += colCandidate->velocity; // *2
             }
         }
     }
-    prevPosition = position;
 }
