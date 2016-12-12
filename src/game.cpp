@@ -3,7 +3,7 @@
 
 Game::Game(){
     window.create(VideoMode(600, 600), "Game");
-    window.setFramerateLimit(1024);
+    window.setFramerateLimit(60);
 }
 
 Game::~Game(){
