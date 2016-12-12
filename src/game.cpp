@@ -1,8 +1,9 @@
 #include "game.h"
-#define MAP_SIZE 20
+#define MAP_SIZE 30
 
 Game::Game(){
-    window.create(VideoMode(600, 600), "Game");
+    window.create(VideoMode(600, 600), "Game", sf::Style::Close | sf::Style::Titlebar);
+
     window.setFramerateLimit(60);
 }
 
