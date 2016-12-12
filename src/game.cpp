@@ -3,7 +3,8 @@
 
 Game::Game(){
     window.create(VideoMode(600, 600), "Game", sf::Style::Close | sf::Style::Titlebar);
-    window.setFramerateLimit(1024);
+
+    window.setFramerateLimit(60);
 }
 
 Game::~Game(){
